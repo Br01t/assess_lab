@@ -94,7 +94,7 @@ const Card = ({ children, className, onClick }: { children: React.ReactNode; cla
   <div 
     onClick={onClick}
     className={cn(
-      'bg-white rounded-2xl border border-gray-100 shadow-sm p-6 transition-all',
+      'bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6 transition-all',
       onClick && 'cursor-pointer hover:shadow-md hover:border-blue-100',
       className
     )}
@@ -616,32 +616,32 @@ function AssessmentWizard({
         {!isPatientStep && <ProgressBar current={currentStepNumber} total={totalSteps} />}
       </div>
 
-      <Card className="p-8 sm:p-12 shadow-xl border-blue-50">
+      <Card className="p-6 sm:p-12 shadow-xl border-blue-50">
         {isPatientStep ? (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <div className="space-y-2">
-              <h2 className="text-3xl font-bold text-gray-800">Dati del Paziente</h2>
-              <p className="text-gray-500">Inserisci il nome del paziente per iniziare la valutazione.</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Dati del Paziente</h2>
+              <p className="text-gray-500 text-sm sm:text-base">Inserisci il nome del paziente per iniziare la valutazione.</p>
             </div>
             <div className="space-y-4">
-              <label className="block text-sm font-bold text-gray-400 uppercase tracking-widest">Nome Completo</label>
+              <label className="block text-[10px] sm:text-sm font-bold text-gray-400 uppercase tracking-widest">Nome Completo</label>
               <input 
                 type="text"
                 value={patientName}
                 onChange={(e) => setPatientName(e.target.value)}
                 placeholder="es. Mario Rossi"
-                className="w-full p-4 rounded-xl border-2 border-gray-100 focus:border-blue-600 focus:ring-0 transition-all text-xl"
+                className="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-100 focus:border-blue-600 focus:ring-0 transition-all text-lg sm:text-xl"
                 autoFocus
               />
             </div>
           </div>
         ) : (
           <>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-gray-800 leading-tight">
+            <h2 className="text-xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-800 leading-tight">
               {step?.question}
             </h2>
 
-            <div className="min-h-[200px]">
+            <div className="min-h-[150px] sm:min-h-[200px]">
               {step && (
                 <StepRenderer 
                   step={step} 
@@ -709,7 +709,7 @@ function StepRenderer({
     case 'scale':
       return (
         <div className="space-y-8">
-          <div className="flex justify-between gap-2">
+          <div className="flex flex-wrap justify-center sm:justify-between gap-3 sm:gap-2">
             {Array.from({ length: (step.max || 10) - (step.min || 1) + 1 }).map((_, i) => {
               const num = (step.min || 1) + i;
               return (
@@ -717,7 +717,7 @@ function StepRenderer({
                   key={num}
                   onClick={() => onChange(num)}
                   className={cn(
-                    'w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold transition-all border-2',
+                    'w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold transition-all border-2',
                     value === num 
                       ? 'bg-blue-600 text-white border-blue-600 scale-110 shadow-lg' 
                       : 'bg-white text-gray-400 border-gray-100 hover:border-blue-300 hover:text-blue-500'
@@ -780,7 +780,7 @@ function StepRenderer({
             className="w-full h-3 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
           />
           <div className="text-center">
-            <span className="text-5xl font-black text-blue-600">{value || 0}%</span>
+            <span className="text-4xl sm:text-5xl font-black text-blue-600">{value || 0}%</span>
           </div>
         </div>
       );
@@ -936,19 +936,19 @@ function ExerciseRunner({
         <p className="text-blue-800/70 text-sm leading-relaxed">{exercise.description}</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-8">
-        <div className="text-center space-y-2">
-          <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Timer</div>
+      <div className="grid grid-cols-2 gap-4 sm:gap-8">
+        <div className="text-center space-y-1 sm:space-y-2">
+          <div className="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-widest">Timer</div>
           <div className={cn(
-            "text-6xl font-black tabular-nums transition-colors",
+            "text-4xl sm:text-6xl font-black tabular-nums transition-colors",
             timeLeft <= 5 ? "text-red-500" : "text-gray-900"
           )}>
             {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
           </div>
         </div>
-        <div className="text-center space-y-2">
-          <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Counter</div>
-          <div className="text-6xl font-black text-blue-600 tabular-nums">{reps}</div>
+        <div className="text-center space-y-1 sm:space-y-2">
+          <div className="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-widest">Counter</div>
+          <div className="text-4xl sm:text-6xl font-black text-blue-600 tabular-nums">{reps}</div>
         </div>
       </div>
 
@@ -1328,7 +1328,7 @@ function DashboardView({
         </div>
 
         {chartData.length > 0 ? (
-          <div className="h-[300px] w-full">
+          <div className="h-[250px] sm:h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={chartData}>
                 <defs>
